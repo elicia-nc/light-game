@@ -13,17 +13,26 @@ import bibliopixel.colors as colors
 import cwiid
 import time
 
+from threading import Thread
+
 # -------------------
 # basic light strip
 # -------------------
 
 STRIP_METERS = 3
 LIGHTS_PER_METER = 144
+TOTAL_LIGHTS = STRIP_METERS * LIGHTS_PER_METER
 
-driver = DriverAPA102(STRIP_METERS*LIGHTS_PER_METER, c_order=ChannelOrder.GRB, SPISpeed=2)
+driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.GRB, SPISpeed=2)
 led = LEDStrip(driver)
 
 animation = lights.WinAnimation(led)
+
+
+def basic_enemy()
+	for i in TOTAL_LIGHTS:
+		pass
+		
 
 # ---------------------------------------
 # this is all for setting up the wiimote
@@ -46,11 +55,15 @@ print 'Press some buttons!\n'
 print 'Press PLUS and MINUS together to disconnect and quit.\n'
 
 wii.rpt_mode = cwiid.RPT_BTN
- 
+
+# a thread for the enemy to live in
+# enemy_thread = Thread(target=basic_enemy, args=(1,))
+
 while True:
 
   buttons = wii.state['buttons']
   player_position = 0
+  enemy_position = TOTAL_LIGHTS
 
   # If Plus and Minus buttons pressed
   # together then rumble and quit.
@@ -60,6 +73,9 @@ while True:
     time.sleep(1)
     wii.rumble = 0
     exit(wii)  
+
+  # the enemy is always coming toward the player
+
   
   # Check if other buttons are pressed by
   # doing a bitwise AND of the buttons number
@@ -75,7 +91,7 @@ while True:
   if (buttons & cwiid.BTN_UP):
     print 'Up pressed'  
     led.set(player_position, colors.Black)
-    if player_position + 1 < STRIP_METERS * LIGHTS_PER_METER:
+    if player_position + 1 < TOTAL_LIGHTS:
 	    player_position += 1
 	    led.set(player_position, colors.Green)
 	else:
