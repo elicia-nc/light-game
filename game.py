@@ -73,9 +73,9 @@ class LightGame(object):
             buttons = wii.state['buttons']
 
             #get the initial XYZ values as offset
-            defaultX = wii.state['acc'][cwiid.X]
+            #defaultX = wii.state['acc'][cwiid.X]
             defaultY = wii.state['acc'][cwiid.Y]
-            defaultZ = wii.state['acc'][cwiid.Z]
+            #defaultZ = wii.state['acc'][cwiid.Z]
 
             # If Plus and Minus buttons pressed
             # together then rumble and quit.
@@ -132,13 +132,16 @@ class LightGame(object):
                 print 'Plus Button pressed'
                 time.sleep(button_delay)
 
+            print "default: " + str(defaultY)
+            print "actual: " + str(wii.state['acc'][cwiid.Y])
+            print "difference: " + str(wii.state['acc'][cwiid.Y] - defaultY)
             if (wii.state['acc'][cwiid.Y] - defaultY) > 5:
                 self.move_up()
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 5:
                 self.move_down()
 
-            print wii.state['acc'][cwiid.Y]
+            #print wii.state['acc'][cwiid.Y]
 
 
 
