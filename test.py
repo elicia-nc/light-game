@@ -95,6 +95,7 @@ while True:
         print 'Up pressed'  
         led.set(player_position, colors.Black)
         led.update()
+        print player_position
         if player_position + 1 < TOTAL_LIGHTS:
             player_position += 1
             led.set(player_position, colors.Green)
@@ -102,12 +103,14 @@ while True:
             print "green up"
         else:
         	animation.run(sleep=0.1, max_steps=200)
+        
         time.sleep(button_delay)          
 
     if (buttons & cwiid.BTN_DOWN):
         print 'Down pressed'
         led.set(player_position, colors.Black)
         led.update()
+        print player_position
         if player_position - 1 > 0:
             player_position -= 1
             led.set(player_position, colors.Green)
@@ -115,7 +118,7 @@ while True:
             print "green down"
         else:
         	led.set(player_position, colors.Red)
-        led.update()
+            led.update()
         time.sleep(button_delay)  
 
     if (buttons & cwiid.BTN_1):
