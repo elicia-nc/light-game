@@ -64,6 +64,8 @@ class LightGame(object):
         self.led.update()
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
+        time.sleep(1)
+        wii.state
         defaultY = wii.state['acc'][cwiid.Y]
 
         # a thread for the enemy to live in
@@ -131,10 +133,10 @@ class LightGame(object):
             print "default: " + str(defaultY)
             print "actual: " + str(wii.state['acc'][cwiid.Y])
             print "difference: " + str(wii.state['acc'][cwiid.Y] - defaultY)
-            if (wii.state['acc'][cwiid.Y] - defaultY) > 5:
+            if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
                 self.move_up()
 
-            if (defaultY - wii.state['acc'][cwiid.Y]) > 5:
+            if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
                 self.move_down()
 
             #print wii.state['acc'][cwiid.Y]
