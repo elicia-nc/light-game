@@ -138,6 +138,9 @@ class LightGame(object):
             if (defaultZ - wii.state['acc'][cwiid.Z]) > 4:
                 self.move_down()
 
+            print wii.state['acc'][cwiid.Z]
+
+
 
     def move_down(self):
         self.led.set(self.player_position, colors.Black)
