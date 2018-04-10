@@ -62,6 +62,7 @@ class LightGame(object):
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
         self.led.set(self.player_position, colors.Violet)
         self.led.update()
+        defaultY = wii.state['acc'][cwiid.Y]
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
 
@@ -71,11 +72,6 @@ class LightGame(object):
         while True:
 
             buttons = wii.state['buttons']
-
-            #get the initial XYZ values as offset
-            #defaultX = wii.state['acc'][cwiid.X]
-            defaultY = wii.state['acc'][cwiid.Y]
-            #defaultZ = wii.state['acc'][cwiid.Z]
 
             # If Plus and Minus buttons pressed
             # together then rumble and quit.
