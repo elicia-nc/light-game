@@ -2,4 +2,4 @@
 import game
 
 game = game.LightGame()
-game.run()
+game.run_game()
