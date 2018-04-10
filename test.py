@@ -61,11 +61,12 @@ wii.rpt_mode = cwiid.RPT_BTN
 # enemy_thread = Thread(target=basic_enemy, args=(1,))
 
 
-player_position = 2
+player_position = 5
 enemy_position = TOTAL_LIGHTS
 led.set(player_position, colors.Blue)
 led.update()
 
+"""
 while True:
 
     buttons = wii.state['buttons']
@@ -153,6 +154,7 @@ while True:
     if (buttons & cwiid.BTN_PLUS):
         print 'Plus Button pressed'
         time.sleep(button_delay)
+"""
 
 
 
