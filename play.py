@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import game.py
+import game
 
 game = game.LightGame()
 game.run()
