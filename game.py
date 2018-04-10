@@ -60,7 +60,7 @@ class LightGame(object):
         print 'Wii Remote connected...\n'
         print 'Press some buttons!\n'
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
-        self.led.set(self.player_position, colors.Green)
+        self.led.set(self.player_position, colors.Violet)
         self.led.update()
 
         wii.rpt_mode = cwiid.RPT_BTN
