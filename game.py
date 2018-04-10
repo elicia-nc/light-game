@@ -132,10 +132,10 @@ class LightGame(object):
                 print 'Plus Button pressed'
                 time.sleep(button_delay)
 
-            if (wii.state['acc'][cwiid.Z] - defaultZ) > 10:
+            if (wii.state['acc'][cwiid.Z] - defaultZ) > 4:
                 self.move_up()
 
-            if (defaultZ - wii.state['acc'][cwiid.Z]) > 10:
+            if (defaultZ - wii.state['acc'][cwiid.Z]) > 4:
                 self.move_down()
 
 
