@@ -61,8 +61,10 @@ wii.rpt_mode = cwiid.RPT_BTN
 # enemy_thread = Thread(target=basic_enemy, args=(1,))
 
 buttons = wii.state['buttons']
-player_position = 0
+player_position = 2
 enemy_position = TOTAL_LIGHTS
+led.set(player_position, colors.Blue)
+led.update()
 
 while True:
 
@@ -97,6 +99,7 @@ while True:
             player_position += 1
             led.set(player_position, colors.Green)
             led.update()
+            print "green up"
         else:
         	animation.run(sleep=0.1, max_steps=200)
         time.sleep(button_delay)          
@@ -109,6 +112,7 @@ while True:
             player_position -= 1
             led.set(player_position, colors.Green)
             led.update()
+            print "green down"
         else:
         	led.set(player_position, colors.Red)
         led.update()
