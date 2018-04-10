@@ -26,10 +26,10 @@ class LightGame(object):
 
     def __init__(self):
         self.driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.BGR, SPISpeed=2)
-        self.led = LEDStrip(driver)
+        self.led = LEDStrip(self.driver)
         self.led.setMasterBrightness(100)
 
-        self.animation = lights.WinAnimation(led)
+        self.animation = lights.WinAnimation(self.led)
         self.player_position = 5
         self.enemy_position = TOTAL_LIGHTS
         self.led.set(player_position, colors.Blue)
