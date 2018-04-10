@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import connect_wiimote
 import lights
 
 from bibliopixel.drivers.APA102 import DriverAPA102
@@ -66,7 +65,6 @@ enemy_position = TOTAL_LIGHTS
 led.set(player_position, colors.Blue)
 led.update()
 
-"""
 while True:
 
     buttons = wii.state['buttons']
@@ -154,7 +152,7 @@ while True:
     if (buttons & cwiid.BTN_PLUS):
         print 'Plus Button pressed'
         time.sleep(button_delay)
-"""
+
 
 
 
