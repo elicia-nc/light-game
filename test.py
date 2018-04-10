@@ -26,7 +26,7 @@ driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.BGR, SPISpeed=2)
 led = LEDStrip(driver)
 led.setMasterBrightness(100)
 
-animation = lights.WinAnimation(led)
+animation = lights.StripTest(led)
 print animation
 
 
@@ -104,7 +104,7 @@ while True:
             led.update()
             print "green up"
         else:
-        	animation.run(sleep=0.1, max_steps=200)
+        	animation.run(sleep=0.01, max_steps=TOTAL_LIGHTS)
 
         time.sleep(button_delay)          
 
@@ -134,7 +134,7 @@ while True:
     if (buttons & cwiid.BTN_A):
         print 'Button A pressed'
         # sleep slows it down enough to see what's happening
-        animation.run(sleep=0.1, max_steps=200)
+        animation.run(sleep=0.01, max_steps=TOTAL_LIGHTS)
         time.sleep(button_delay)          
 
     if (buttons & cwiid.BTN_B):
