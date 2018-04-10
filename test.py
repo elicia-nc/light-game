@@ -22,11 +22,12 @@ STRIP_METERS = 3
 LIGHTS_PER_METER = 144
 TOTAL_LIGHTS = STRIP_METERS * LIGHTS_PER_METER
 
-driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.GRB, SPISpeed=2)
+driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.BGR, SPISpeed=2)
 led = LEDStrip(driver)
 led.setMasterBrightness(100)
 
 animation = lights.WinAnimation(led)
+print animation
 
 
 # def basic_enemy()
