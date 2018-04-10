@@ -27,7 +27,7 @@ class LightGame(object):
     def __init__(self):
         self.driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.BGR, SPISpeed=2)
         self.led = LEDStrip(self.driver)
-        self.led.setMasterBrightness(100)
+        self.led.setMasterBrightness(70)
 
         self.animation = lights.WinAnimation(self.led)
         self.player_position = 5
@@ -108,7 +108,7 @@ class LightGame(object):
                 time.sleep(button_delay)          
 
             if (buttons & cwiid.BTN_A):
-                self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)      
+                self.animation.run(max_steps=TOTAL_LIGHTS*2)      
 
             if (buttons & cwiid.BTN_B):
                 self.clear_all()         
@@ -145,7 +145,7 @@ class LightGame(object):
             self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
-            self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)   
+            self.animation.run(max_steps=TOTAL_LIGHTS*2)   
 
     def clear_all(self):
         self.led.fill(colors.Black)

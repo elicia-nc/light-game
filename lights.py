@@ -33,7 +33,6 @@ class WinAnimation(BaseStripAnim):
 		self._colors = [colors.Red, colors.Orange, colors.Yellow, colors.Green, colors.Blue, colors.Indigo]
 
 	def step(self, amt=1):
-		print "steping animation"
 		# the light strip hasn't been filled with colour yet
 		if self._step/2 < self._led.numLEDs: 
 			# move the colours along by 3 before adding another led to the ones being lit up
