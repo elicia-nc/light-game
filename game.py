@@ -68,7 +68,7 @@ class LightGame(object):
 
         while True:
 
-            self.buttons = wii.state['buttons']
+            buttons = wii.state['buttons']
 
             # If Plus and Minus buttons pressed
             # together then rumble and quit.
