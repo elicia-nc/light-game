@@ -60,13 +60,15 @@ wii.rpt_mode = cwiid.RPT_BTN
 # a thread for the enemy to live in
 # enemy_thread = Thread(target=basic_enemy, args=(1,))
 
-buttons = wii.state['buttons']
+
 player_position = 2
 enemy_position = TOTAL_LIGHTS
 led.set(player_position, colors.Blue)
 led.update()
 
 while True:
+
+    buttons = wii.state['buttons']
 
     # If Plus and Minus buttons pressed
     # together then rumble and quit.
@@ -103,7 +105,7 @@ while True:
             print "green up"
         else:
         	animation.run(sleep=0.1, max_steps=200)
-        
+
         time.sleep(button_delay)          
 
     if (buttons & cwiid.BTN_DOWN):
