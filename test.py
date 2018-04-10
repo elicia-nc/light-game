@@ -25,13 +25,14 @@ TOTAL_LIGHTS = STRIP_METERS * LIGHTS_PER_METER
 
 driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.GRB, SPISpeed=2)
 led = LEDStrip(driver)
+led.setMasterBrightness(100)
 
 animation = lights.WinAnimation(led)
 
 
-def basic_enemy()
-	for i in TOTAL_LIGHTS:
-		pass
+# def basic_enemy()
+# 	for i in TOTAL_LIGHTS:
+# 		pass
 		
 
 # ---------------------------------------
@@ -59,11 +60,11 @@ wii.rpt_mode = cwiid.RPT_BTN
 # a thread for the enemy to live in
 # enemy_thread = Thread(target=basic_enemy, args=(1,))
 
-while True:
+buttons = wii.state['buttons']
+player_position = 0
+enemy_position = TOTAL_LIGHTS
 
-  buttons = wii.state['buttons']
-  player_position = 0
-  enemy_position = TOTAL_LIGHTS
+while True:
 
   # If Plus and Minus buttons pressed
   # together then rumble and quit.
@@ -91,9 +92,11 @@ while True:
   if (buttons & cwiid.BTN_UP):
     print 'Up pressed'  
     led.set(player_position, colors.Black)
+    led.update()
     if player_position + 1 < TOTAL_LIGHTS:
 	    player_position += 1
 	    led.set(player_position, colors.Green)
+      led.update()
 	else:
 		animation.run(sleep=0.1, max_steps=200)
     time.sleep(button_delay)          
@@ -101,11 +104,14 @@ while True:
   if (buttons & cwiid.BTN_DOWN):
     print 'Down pressed'
     led.set(player_position, colors.Black)
+    led.update()
     if player_position - 1 > 0:
 	    player_position -= 1
 	    led.set(player_position, colors.Green)
+      led.update()
 	else:
 		led.set(player_position, colors.Red)
+    led.update()
     time.sleep(button_delay)  
     
   if (buttons & cwiid.BTN_1):

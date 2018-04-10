@@ -15,7 +15,10 @@ TOTAL_LIGHTS = STRIP_METERS * LIGHTS_PER_METER
 driver = DriverAPA102(TOTAL_LIGHTS, c_order=ChannelOrder.GRB, SPISpeed=2)
 led = LEDStrip(driver)
 rainbow = [colors.Red, colors.Orange, colors.Yellow, colors.Green, colors.Blue, colors.Indigo, colors.Violet]
+
+led.setMasterBrightness(100)
 		
 for color in rainbow:
-  led.fill(color)      
+  led.fill(color)
+  led.update()      
   time.sleep(5)
