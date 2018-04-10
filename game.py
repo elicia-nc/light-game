@@ -108,16 +108,10 @@ class LightGame(object):
                 time.sleep(button_delay)          
 
             if (buttons & cwiid.BTN_A):
-                print 'Button A pressed'
-                # sleep slows it down enough to see what's happening
-                animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)
-                time.sleep(button_delay)          
+                self.run_animation()      
 
             if (buttons & cwiid.BTN_B):
-                print 'Button B pressed'
-                led.fill(colors.Black)
-                led.update()
-                time.sleep(button_delay)          
+                self.clear_all()         
 
             if (buttons & cwiid.BTN_HOME):
                 print 'Home Button pressed'
@@ -151,7 +145,16 @@ class LightGame(object):
             self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
-            self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)        
+            self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)   
+
+    def clear_all(self):
+        self.led.fill(colors.Black)
+        self.led.update()  
+
+    def run_animation(self):
+        # sleep slows it down enough to see what's happening
+        self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)
+        time.sleep(button_delay)     
 
 
 
