@@ -62,9 +62,9 @@ class LightGame(object):
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
         self.led.set(self.player_position, colors.Violet)
         self.led.update()
-        defaultY = wii.state['acc'][cwiid.Y]
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
+        defaultY = wii.state['acc'][cwiid.Y]
 
         # a thread for the enemy to live in
         # enemy_thread = Thread(target=basic_enemy, args=(1,))
