@@ -110,7 +110,7 @@ class LightGame(object):
                 time.sleep(button_delay)          
 
             if (buttons & cwiid.BTN_A):
-                self.animation.run(sleep=0.05, max_steps=TOTAL_LIGHTS*2)      
+                self.animation.run(sleep=0.1, max_steps=200)      
 
             if (buttons & cwiid.BTN_B):
                 self.clear_all()         
@@ -147,11 +147,14 @@ class LightGame(object):
             self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
-            self.animation.run(sleep=0.1, max_steps=TOTAL_LIGHTS*2)   
+            self.animation.run(sleep=0.1, max_steps=200)   
 
     def clear_all(self):
         self.led.fill(colors.Black)
         self.led.update()  
+        self.player_position = 2
+        self.led.set(self.player_position, colors.Violet)
+        self.led.update()
 
 
 
