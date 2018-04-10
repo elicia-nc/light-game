@@ -16,7 +16,6 @@ class StripTest(BaseStripAnim):
 		# for every led in the strip
 		for i in range(self._led.numLEDs):
 			self._led.set(i, self._colors[(self._step + i) % len(self._colors)])
-			self._led.update()
 			# Increment the internal step by the given amount
 			self._step += amt
 
@@ -41,12 +40,11 @@ class WinAnimation(BaseStripAnim):
 			# Fill the strip, with each sucessive color
 			for i in range(self._step/3):
 				self._led.set(i, self._colors[(self._step + i) % len(self._colors)])
-				self._led.update()
+				self._step += amt
 		# the light strip is filled. RAINBOWS
 		else:
 			for i in range(self._led.numLEDs):
 				self._led.set(i, self._colors[(self._step + i) % len(self._colors)])
-				self._led.update()
 				self._step += amt
 
 
