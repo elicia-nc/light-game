@@ -34,10 +34,10 @@ class WinAnimation(BaseStripAnim):
 
 	def step(self, amt=1):
 		# the light strip hasn't been filled with colour yet
-		if self._step/2 < self._led.numLEDs: 
+		if self._step*3 < self._led.numLEDs: 
 			# move the colours along by 3 before adding another led to the ones being lit up
 			# Fill the strip, with each sucessive color
-			for i in range(self._step/2):
+			for i in range(self._step*3):
 				self._led.set(i, self._colors[(self._step + i) % len(self._colors)])
 		# the light strip is filled. RAINBOWS
 		else:
