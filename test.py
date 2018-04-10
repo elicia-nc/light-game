@@ -46,10 +46,10 @@ time.sleep(1)
 # Connect to the Wii Remote. If it times out
 # then quit.
 try:
-  wii=cwiid.Wiimote()
+    wii=cwiid.Wiimote()
 except RuntimeError:
-  print "Error opening wiimote connection"
-  quit()
+    print "Error opening wiimote connection"
+    quit()
 
 print 'Wii Remote connected...\n'
 print 'Press some buttons!\n'
@@ -66,84 +66,84 @@ enemy_position = TOTAL_LIGHTS
 
 while True:
 
-  # If Plus and Minus buttons pressed
-  # together then rumble and quit.
-  if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):  
-    print '\nClosing connection ...'
-    wii.rumble = 1
-    time.sleep(1)
-    wii.rumble = 0
-    exit(wii)  
+    # If Plus and Minus buttons pressed
+    # together then rumble and quit.
+    if (buttons - cwiid.BTN_PLUS - cwiid.BTN_MINUS == 0):  
+        print '\nClosing connection ...'
+        wii.rumble = 1
+        time.sleep(1)
+        wii.rumble = 0
+        exit(wii)  
 
-  # the enemy is always coming toward the player
+    # the enemy is always coming toward the player
 
-  
-  # Check if other buttons are pressed by
-  # doing a bitwise AND of the buttons number
-  # and the predefined constant for that button.
-  if (buttons & cwiid.BTN_LEFT):
-    print 'Left pressed'
-    time.sleep(button_delay)         
 
-  if(buttons & cwiid.BTN_RIGHT):
-    print 'Right pressed'
-    time.sleep(button_delay)          
+    # Check if other buttons are pressed by
+    # doing a bitwise AND of the buttons number
+    # and the predefined constant for that button.
+    if (buttons & cwiid.BTN_LEFT):
+        print 'Left pressed'
+        time.sleep(button_delay)         
 
-  if (buttons & cwiid.BTN_UP):
-    print 'Up pressed'  
-    led.set(player_position, colors.Black)
-    led.update()
-    if player_position + 1 < TOTAL_LIGHTS:
-	    player_position += 1
-	    led.set(player_position, colors.Green)
-      led.update()
-	else:
-		animation.run(sleep=0.1, max_steps=200)
-    time.sleep(button_delay)          
-    
-  if (buttons & cwiid.BTN_DOWN):
-    print 'Down pressed'
-    led.set(player_position, colors.Black)
-    led.update()
-    if player_position - 1 > 0:
-	    player_position -= 1
-	    led.set(player_position, colors.Green)
-      led.update()
-	else:
-		led.set(player_position, colors.Red)
-    led.update()
-    time.sleep(button_delay)  
-    
-  if (buttons & cwiid.BTN_1):
-    print 'Button 1 pressed'
-    time.sleep(button_delay)          
+    if(buttons & cwiid.BTN_RIGHT):
+        print 'Right pressed'
+        time.sleep(button_delay)          
 
-  if (buttons & cwiid.BTN_2):
-    print 'Button 2 pressed'
-    time.sleep(button_delay)          
+    if (buttons & cwiid.BTN_UP):
+        print 'Up pressed'  
+        led.set(player_position, colors.Black)
+        led.update()
+        if player_position + 1 < TOTAL_LIGHTS:
+            player_position += 1
+            led.set(player_position, colors.Green)
+            led.update()
+        else:
+        	animation.run(sleep=0.1, max_steps=200)
+        time.sleep(button_delay)          
 
-  if (buttons & cwiid.BTN_A):
-    print 'Button A pressed'
-    # sleep slows it down enough to see what's happening
-    animation.run(sleep=0.1, max_steps=200)
-    time.sleep(button_delay)          
+    if (buttons & cwiid.BTN_DOWN):
+        print 'Down pressed'
+        led.set(player_position, colors.Black)
+        led.update()
+        if player_position - 1 > 0:
+            player_position -= 1
+            led.set(player_position, colors.Green)
+            led.update()
+        else:
+        	led.set(player_position, colors.Red)
+        led.update()
+        time.sleep(button_delay)  
 
-  if (buttons & cwiid.BTN_B):
-    print 'Button B pressed'
-    led.fill(colors.Black)
-    time.sleep(button_delay)          
+    if (buttons & cwiid.BTN_1):
+        print 'Button 1 pressed'
+        time.sleep(button_delay)          
 
-  if (buttons & cwiid.BTN_HOME):
-    print 'Home Button pressed'
-    time.sleep(button_delay)           
-    
-  if (buttons & cwiid.BTN_MINUS):
-    print 'Minus Button pressed'
-    time.sleep(button_delay)   
-    
-  if (buttons & cwiid.BTN_PLUS):
-    print 'Plus Button pressed'
-    time.sleep(button_delay)
+    if (buttons & cwiid.BTN_2):
+        print 'Button 2 pressed'
+        time.sleep(button_delay)          
+
+    if (buttons & cwiid.BTN_A):
+        print 'Button A pressed'
+        # sleep slows it down enough to see what's happening
+        animation.run(sleep=0.1, max_steps=200)
+        time.sleep(button_delay)          
+
+    if (buttons & cwiid.BTN_B):
+        print 'Button B pressed'
+        led.fill(colors.Black)
+        time.sleep(button_delay)          
+
+    if (buttons & cwiid.BTN_HOME):
+        print 'Home Button pressed'
+        time.sleep(button_delay)           
+
+    if (buttons & cwiid.BTN_MINUS):
+        print 'Minus Button pressed'
+        time.sleep(button_delay)   
+
+    if (buttons & cwiid.BTN_PLUS):
+        print 'Plus Button pressed'
+        time.sleep(button_delay)
 
 
 
