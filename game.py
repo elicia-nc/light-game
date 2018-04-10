@@ -133,32 +133,44 @@ class LightGame(object):
             print "default: " + str(defaultY)
             print "actual: " + str(wii.state['acc'][cwiid.Y])
             print "difference: " + str(wii.state['acc'][cwiid.Y] - defaultY)
-            if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
+            if (wii.state['acc'][cwiid.Y] - defaultY) > 5:
                 self.move_up()
 
-            if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
+            if (defaultY - wii.state['acc'][cwiid.Y]) > 5:
                 self.move_down()
+
+            if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
+                self.move_up(2)
+
+            if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
+                self.move_down(2)
+
+            if (wii.state['acc'][cwiid.Y] - defaultY) > 15:
+                self.move_up(4)
+
+            if (defaultY - wii.state['acc'][cwiid.Y]) > 15:
+                self.move_down(4)
 
             #print wii.state['acc'][cwiid.Y]
 
 
 
-    def move_down(self):
+    def move_down(self, speed=1):
         self.led.set(self.player_position, colors.Black)
         self.led.update()
-        if self.player_position - 1 > 0:
-            self.player_position -= 1
+        if self.player_position - speed > 0:
+            self.player_position -= speed
             self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
             self.led.set(self.player_position, colors.Red)
             self.led.update() 
 
-    def move_up(self):
+    def move_up(self, speed=1):
         self.led.set(self.player_position, colors.Black)
         self.led.update()
-        if self.player_position + 1 < TOTAL_LIGHTS:
-            self.player_position += 1
+        if self.player_position + speed < TOTAL_LIGHTS:
+            self.player_position += speed
             self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
