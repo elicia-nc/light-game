@@ -32,7 +32,7 @@ class LightGame(object):
         self.animation = lights.WinAnimation(self.led)
         self.player_position = 5
         self.enemy_position = TOTAL_LIGHTS
-        self.led.set(player_position, colors.Blue)
+        self.led.set(self.player_position, colors.Blue)
         self.led.update()
 
 
@@ -140,15 +140,15 @@ class LightGame(object):
             self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
-            self.led.set(player_position, colors.Red)
+            self.led.set(self.player_position, colors.Red)
             self.led.update() 
 
     def move_up(self):
-        self.led.set(player_position, colors.Black)
+        self.led.set(self.player_position, colors.Black)
         self.led.update()
         if self.player_position + 1 < TOTAL_LIGHTS:
             self.player_position += 1
-            self.led.set(player_position, colors.Green)
+            self.led.set(self.player_position, colors.Green)
             self.led.update()
         else:
             self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)        
