@@ -63,7 +63,7 @@ class LightGame(object):
         self.led.set(self.player_position, colors.Violet)
         self.led.update()
 
-        wii.rpt_mode = cwiid.RPT_BTN
+        wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
 
         # a thread for the enemy to live in
         # enemy_thread = Thread(target=basic_enemy, args=(1,))
