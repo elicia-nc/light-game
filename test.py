@@ -68,7 +68,7 @@ class LightGame(object):
 
         while True:
 
-            buttons = wii.state['buttons']
+            self.buttons = wii.state['buttons']
 
             # If Plus and Minus buttons pressed
             # together then rumble and quit.
@@ -133,26 +133,25 @@ class LightGame(object):
 
 
     def move_down(self):
-            led.set(player_position, colors.Black)
-            led.update()
-            if player_position - 1 > 0:
-                player_position -= 1
-                led.set(player_position, colors.Green)
-                led.update()
-            else:
-                led.set(player_position, colors.Red)
-                led.update() 
+        self.led.set(self.player_position, colors.Black)
+        self.led.update()
+        if self.player_position - 1 > 0:
+            self.player_position -= 1
+            self.led.set(self.player_position, colors.Green)
+            self.led.update()
+        else:
+            self.led.set(player_position, colors.Red)
+            self.led.update() 
 
     def move_up(self):
-            if (buttons & cwiid.BTN_UP):
-            led.set(player_position, colors.Black)
-            led.update()
-            if player_position + 1 < TOTAL_LIGHTS:
-                player_position += 1
-                led.set(player_position, colors.Green)
-                led.update()
-            else:
-                animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)        
+        self.led.set(player_position, colors.Black)
+        self.led.update()
+        if self.player_position + 1 < TOTAL_LIGHTS:
+            self.player_position += 1
+            self.led.set(player_position, colors.Green)
+            self.led.update()
+        else:
+            self.animation.run(sleep=0.001, max_steps=TOTAL_LIGHTS)        
 
 
 
