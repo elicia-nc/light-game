@@ -117,7 +117,7 @@ while True:
             led.update()
             print "green down"
         else:
-        	led.set(player_position, colors.Red)
+            led.set(player_position, colors.Red)
             led.update()
         time.sleep(button_delay)  
 
