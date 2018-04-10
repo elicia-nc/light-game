@@ -103,7 +103,7 @@ while True:
             led.update()
             print "green up"
         else:
-        	animation.run(sleep=0.1, max_steps=200)
+        	animation.run(sleep=0.08, max_steps=TOTAL_LIGHTS)
 
         #time.sleep(button_delay)          
 
@@ -132,12 +132,13 @@ while True:
     if (buttons & cwiid.BTN_A):
         print 'Button A pressed'
         # sleep slows it down enough to see what's happening
-        animation.run(sleep=0.1, max_steps=200)
+        animation.run(sleep=0.08, max_steps=TOTAL_LIGHTS)
         time.sleep(button_delay)          
 
     if (buttons & cwiid.BTN_B):
         print 'Button B pressed'
         led.fill(colors.Black)
+        led.update()
         time.sleep(button_delay)          
 
     if (buttons & cwiid.BTN_HOME):
