@@ -162,10 +162,10 @@ class LightGame(object):
                 time.sleep(button_delay)          
 
             if (buttons & cwiid.BTN_UP):
-                player.move_up()      
+                self.player.move_up()      
 
             if (buttons & cwiid.BTN_DOWN):
-                player.move_down() 
+                self.player.move_down() 
 
             if (buttons & cwiid.BTN_1):
                 print 'Button 1 pressed'
@@ -194,25 +194,25 @@ class LightGame(object):
                 time.sleep(button_delay)
 
             if (wii.state['acc'][cwiid.Y] - defaultY) > 5:
-                player.move_up()
+                self.player.move_up()
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 5:
-                player.move_down()
+                self.player.move_down()
 
             if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
-                player.move_up(2)
+                self.player.move_up(2)
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
-                player.move_down(2)
+                self.player.move_down(2)
 
             if (wii.state['acc'][cwiid.Y] - defaultY) > 15:
-                player.move_up(4)
+                self.player.move_up(4)
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 15:
-                player.move_down(4)
+                self.player.move_down(4)
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
-                player.attack()
+                self.player.attack()
 
             print wii.state['acc'][cwiid.X]
     
