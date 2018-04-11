@@ -122,7 +122,7 @@ class LightGame(object):
         print 'Press some buttons!\n'
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
 
-        thread.start_new_thread(self.move_enemy, (self.enemy))
+        thread.start_new_thread(self.move_enemy, (self.enemy, ))
         
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
