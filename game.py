@@ -11,8 +11,7 @@ import bibliopixel.colors as colors
 # stuff for the wiimote
 import cwiid
 import time
-
-from threading import Thread
+import thread
 
 # -------------------
 # basic light strip
@@ -22,6 +21,65 @@ STRIP_METERS = 3
 LIGHTS_PER_METER = 144
 TOTAL_LIGHTS = STRIP_METERS * LIGHTS_PER_METER
 
+class Player(object):
+    def __init__(self, led):
+        self.position = 2
+        self.color = colors.Violet
+        self.led = led
+
+    def move_down(self, speed=1):
+        self.led.set(self.position, colors.Black)
+        self.led.update()
+        if self.position - speed > 0:
+            self.position -= speed
+            self.color = colors.Green
+            self.player_update()
+        else:
+            self.color = colors.Red
+            self.player_update()
+
+    def move_up(self, speed=1):
+        self.led.set(self.position, colors.Black)
+        self.led.update()
+        if self.position + speed < TOTAL_LIGHTS:
+            self.position += speed
+            self.color = colors.Green
+            self.player_update()
+        else:
+            self.animation.run(sleep=0.1, max_steps=200)   
+
+    def player_update(self):
+        self.led.set(self.position, self.color)
+        self.led.update()
+
+    def attack(self):
+        self.color = colors.Yellow
+        self.attacking = True
+        self.player_update()
+
+
+class Enemy(object):
+    def __init__(self):
+        self.position = TOTAL_LIGHTS
+        self.color = colors.Red
+        self.led = led
+
+    def move_down(self, speed=1):
+        self.led.set(self.position, colors.Black)
+        self.led.update()
+        if self.position - speed > 0:
+            self.position -= speed
+            self.color = colors.Red
+            self.player_update()
+        else:
+            self.color = colors.Red
+            self.player_update()
+
+    def player_update(self):
+        self.led.set(self.position, self.color)
+        self.led.update()
+
+
 class LightGame(object):
 
     def __init__(self):
@@ -30,9 +88,9 @@ class LightGame(object):
         self.led.setMasterBrightness(70)
 
         self.animation = lights.WinAnimation(self.led)
-        self.player_position = 5
-        self.enemy_position = TOTAL_LIGHTS
-        self.led.set(self.player_position, colors.Blue)
+        self.player.position = 5
+        self.enemy.position = TOTAL_LIGHTS
+        self.led.set(self.player.position, colors.Blue)
         self.led.update()
 
 
@@ -60,13 +118,17 @@ class LightGame(object):
         print 'Wii Remote connected...\n'
         print 'Press some buttons!\n'
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
-        self.led.set(self.player_position, colors.Violet)
-        self.led.update()
+        player = Player(led)
+
+        enemy = Enemy(led)
+        thread.start_new_thread(self.move_enemy, (enemy))
+        
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
         time.sleep(1)
         wii.state
         defaultY = wii.state['acc'][cwiid.Y]
+        defaultX = wii.state['acc'][cwiid.X]
 
         # a thread for the enemy to live in
         # enemy_thread = Thread(target=basic_enemy, args=(1,))
@@ -99,10 +161,10 @@ class LightGame(object):
                 time.sleep(button_delay)          
 
             if (buttons & cwiid.BTN_UP):
-                self.move_up()      
+                player.move_up()      
 
             if (buttons & cwiid.BTN_DOWN):
-                self.move_down() 
+                player.move_down() 
 
             if (buttons & cwiid.BTN_1):
                 print 'Button 1 pressed'
@@ -130,58 +192,42 @@ class LightGame(object):
                 print 'Plus Button pressed'
                 time.sleep(button_delay)
 
-            print "default: " + str(defaultY)
-            print "actual: " + str(wii.state['acc'][cwiid.Y])
-            print "difference: " + str(wii.state['acc'][cwiid.Y] - defaultY)
             if (wii.state['acc'][cwiid.Y] - defaultY) > 5:
-                self.move_up()
+                player.move_up()
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 5:
-                self.move_down()
+                player.move_down()
 
             if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
-                self.move_up(2)
+                player.move_up(2)
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
-                self.move_down(2)
+                player.move_down(2)
 
             if (wii.state['acc'][cwiid.Y] - defaultY) > 15:
-                self.move_up(4)
+                player.move_up(4)
 
             if (defaultY - wii.state['acc'][cwiid.Y]) > 15:
-                self.move_down(4)
+                player.move_down(4)
 
-            #print wii.state['acc'][cwiid.Y]
+            if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
+                player.attack()
 
-
-
-    def move_down(self, speed=1):
-        self.led.set(self.player_position, colors.Black)
-        self.led.update()
-        if self.player_position - speed > 0:
-            self.player_position -= speed
-            self.led.set(self.player_position, colors.Green)
-            self.led.update()
-        else:
-            self.led.set(self.player_position, colors.Red)
-            self.led.update() 
-
-    def move_up(self, speed=1):
-        self.led.set(self.player_position, colors.Black)
-        self.led.update()
-        if self.player_position + speed < TOTAL_LIGHTS:
-            self.player_position += speed
-            self.led.set(self.player_position, colors.Green)
-            self.led.update()
-        else:
-            self.animation.run(sleep=0.1, max_steps=200)   
+            print wii.state['acc'][cwiid.X]
+    
 
     def clear_all(self):
         self.led.fill(colors.Black)
         self.led.update()  
         self.player_position = 2
-        self.led.set(self.player_position, colors.Violet)
-        self.led.update()
+        self.player_color = colors.Violet
+        self.player_update()
+
+    def move_enemy(self, enemy):
+        for i in range(TOTAL_LIGHTS, -1, -1):
+            enemy.move_down()
+            time.sleep(1)
+
 
 
 
