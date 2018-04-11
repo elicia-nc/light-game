@@ -217,8 +217,6 @@ class LightGame(object):
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
-
-            print wii.state['acc'][cwiid.X]
     
 
     def clear_all(self):
