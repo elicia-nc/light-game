@@ -87,6 +87,9 @@ class LightGame(object):
         self.led = LEDStrip(self.driver)
         self.led.setMasterBrightness(70)
 
+        self.player = Player(led)
+        self.enemy = Enemy(led)
+
         self.animation = lights.WinAnimation(self.led)
         self.player.position = 5
         self.enemy.position = TOTAL_LIGHTS
@@ -118,10 +121,8 @@ class LightGame(object):
         print 'Wii Remote connected...\n'
         print 'Press some buttons!\n'
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
-        player = Player(led)
 
-        enemy = Enemy(led)
-        thread.start_new_thread(self.move_enemy, (enemy))
+        thread.start_new_thread(self.move_enemy, (self.enemy))
         
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
