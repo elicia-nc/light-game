@@ -59,7 +59,7 @@ class Player(object):
 
 
 class Enemy(object):
-    def __init__(self):
+    def __init__(self, led):
         self.position = TOTAL_LIGHTS
         self.color = colors.Red
         self.led = led
