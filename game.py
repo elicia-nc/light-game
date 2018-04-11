@@ -87,8 +87,8 @@ class LightGame(object):
         self.led = LEDStrip(self.driver)
         self.led.setMasterBrightness(70)
 
-        self.player = Player(led)
-        self.enemy = Enemy(led)
+        self.player = Player(self.led)
+        self.enemy = Enemy(self.led)
 
         self.animation = lights.WinAnimation(self.led)
         self.player.position = 5
