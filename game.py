@@ -26,6 +26,7 @@ class Player(object):
         self.position = 2
         self.color = colors.Violet
         self.led = led
+        self.animation = lights.WinAnimation(self.led)
 
     def move_down(self, speed=1):
         self.led.set(self.position, colors.Black)
@@ -89,8 +90,8 @@ class LightGame(object):
 
         self.player = Player(self.led)
         self.enemy = Enemy(self.led)
-
         self.animation = lights.WinAnimation(self.led)
+        
         self.player.position = 5
         self.enemy.position = TOTAL_LIGHTS
         self.led.set(self.player.position, colors.Blue)
@@ -147,7 +148,10 @@ class LightGame(object):
                 wii.rumble = 0
                 exit(wii)  
 
-            # the enemy is always coming toward the player
+            # check for collision
+            if self.player.position == self.enemy.position:
+                self.led.fill(colors.Red)
+                self.led.update()
 
 
             # Check if other buttons are pressed by
@@ -220,8 +224,8 @@ class LightGame(object):
     def clear_all(self):
         self.led.fill(colors.Black)
         self.led.update()  
-        self.player_position = 2
-        self.player_color = colors.Violet
+        self.player.position = 2
+        self.player.color = colors.Violet
         self.player_update()
 
     def move_enemy(self, enemy):
