@@ -51,7 +51,7 @@ class Player(object):
         self.led.update()
 
     def attack(self):
-        self.color = colors.Orange
+        self.color = colors.Blue
         self.attacking = True
         self.update()
 
@@ -154,9 +154,9 @@ class LightGame(object):
 
             # check for collision
             if self.player.position == self.enemy.position:
-                if player.attacking == True:
+                if self.player.attacking == True:
                     self.enemy.die()
-                    del enemy
+                    del self.enemy
                 else:
                     self.led.fill(colors.Red)
                     self.led.update()
