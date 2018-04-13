@@ -231,6 +231,7 @@ class LightGame(object):
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
+                print self.player.is_attacking
     
             if (wii.state['acc'][cwiid.X] - defaultX) <= 10 or (defaultX - wii.state['acc'][cwiid.X]) <= 10:
                 self.player.stop_attack()
