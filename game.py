@@ -239,8 +239,7 @@ class LightGame(object):
             #     self.player.move_down(4)
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
-                if player.can_attack():
-                    self.player.attack()
+                self.player.attack()
             else:
                 self.player.stop_attack()
 
