@@ -228,7 +228,7 @@ class LightGame(object):
 
     def move_enemy(self, enemy):
         enemy.move_down()
-        time.sleep(0.3)
+        #time.sleep(0.3)
 
 
 
