@@ -153,8 +153,6 @@ class LightGame(object):
                 wii.rumble = 0
                 exit(wii)  
 
-            print self.player.is_attacking
-
             # check for collision
             if self.player.position == self.enemy.position:
                 if self.player.is_attacking == True:
@@ -231,9 +229,7 @@ class LightGame(object):
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
-                print self.player.is_attacking
-    
-            if (wii.state['acc'][cwiid.X] - defaultX) <= 10 or (defaultX - wii.state['acc'][cwiid.X]) <= 10:
+            else:
                 self.player.stop_attack()
 
 
