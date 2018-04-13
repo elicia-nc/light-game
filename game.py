@@ -156,14 +156,14 @@ class LightGame(object):
             # if the enemy hasn't died yet
             if self.enemy:
                 # check for collision
-                if self.player.position == self.enemy.position:
+                if self.player.position in range(self.enemy.position-1, self.enemy.position+2):
                     if self.player.is_attacking == True:
                         self.enemy.die()
                         self.enemy = None
                     else:
                         self.led.fill(colors.Red)
                         self.led.update()
-                # keep moving
+            if self.enemy:
                 self.enemy.move_down()
 
 
