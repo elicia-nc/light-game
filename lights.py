@@ -25,7 +25,7 @@ class Death(BaseStripAnim):
 		# The base class MUST be initialized by calling super like this
 		super(Death, self).__init__(led, start, end)
 		# Create a color array to use in the animation
-		self._colors = [colors.Red, colors.Orange]
+		self._colors = [colors.Red, colors.Orange, colors.Crimson, colors.FireBrick]
 
 	def step(self, amt=1):
 		# Fill the strip, with each sucessive color

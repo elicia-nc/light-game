@@ -165,13 +165,13 @@ class LightGame(object):
                         self.enemy = None
                     else:
                         anim = lights.Death(self.led)
-                        anim.run(sleep=0.9, max_steps=200)
+                        anim.run(sleep=2, max_steps=200)
                         self.clear_all()
             if self.enemy:
                 self.enemy.move_down()
 
             if self.player.position == TOTAL_LIGHTS - 1:
-                self.animation.run(sleep=0.1, max_steps=200)
+                self.animation.run(sleep=0.5, max_steps=200)
                 self.player.position = 2
 
 
@@ -201,7 +201,7 @@ class LightGame(object):
                 time.sleep(button_delay)          
 
             if (buttons & cwiid.BTN_A):
-                self.animation.run(sleep=0.1, max_steps=200)      
+                self.animation.run(sleep=0.5, max_steps=200)      
 
             if (buttons & cwiid.BTN_B):
                 defaultY = wii.state['acc'][cwiid.Y]
