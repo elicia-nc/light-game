@@ -161,8 +161,8 @@ class LightGame(object):
                         self.enemy.die()
                         self.enemy = None
                     else:
-                        self.led.fill(colors.Red)
-                        self.led.update()
+                        anim = lights.Death(self.led)
+                        anim.run(sleep=0.1, max_steps=200)
                         self.clear_all()
             if self.enemy:
                 self.enemy.move_down()
