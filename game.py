@@ -227,9 +227,8 @@ class LightGame(object):
         self.player.update()
 
     def move_enemy(self, enemy):
-        for i in range(200):
-            enemy.move_down()
-            time.sleep(0.3)
+        enemy.move_down()
+        time.sleep(0.3)
 
 
 
