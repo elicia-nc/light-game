@@ -25,7 +25,6 @@ class Player(object):
         self.position = 2
         self.color = colors.Violet
         self.led = led
-        self.animation = lights.WinAnimation(self.led)
         self.is_attacking = False
 
     def move_down(self, speed=1):
@@ -44,8 +43,6 @@ class Player(object):
         if self.position + speed < TOTAL_LIGHTS:
             self.position += speed
             self.update()
-        else:
-            self.animation.run(sleep=0.1, max_steps=200)   
 
     def update(self):
         self.led.set(self.position, self.color)
@@ -161,10 +158,14 @@ class LightGame(object):
                         self.enemy = None
                     else:
                         anim = lights.Death(self.led)
-                        anim.run(sleep=0.1, max_steps=200)
+                        anim.run(sleep=0.9, max_steps=200)
                         self.clear_all()
             if self.enemy:
                 self.enemy.move_down()
+
+            if self.player.position == TOTAL_LIGHTS - 1:
+                self.animation.run(sleep=0.1, max_steps=200)
+                self.player.position = 2
 
 
             # Check if other buttons are pressed by
