@@ -11,7 +11,6 @@ import bibliopixel.colors as colors
 # stuff for the wiimote
 import cwiid
 import time
-import thread
 
 # -------------------
 # basic light strip
@@ -123,8 +122,6 @@ class LightGame(object):
         print 'Wii Remote connected...\n'
         print 'Press some buttons!\n'
         print 'Press PLUS and MINUS together to disconnect and quit.\n'
-
-        thread.start_new_thread(self.move_enemy, (self.enemy, ))
         
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
@@ -137,8 +134,6 @@ class LightGame(object):
         # enemy_thread = Thread(target=basic_enemy, args=(1,))
 
         while True:
-
-            self.led.update()
 
             buttons = wii.state['buttons']
 
@@ -220,6 +215,8 @@ class LightGame(object):
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
+
+            self.move_enemy(self.enemy)
     
 
     def clear_all(self):
