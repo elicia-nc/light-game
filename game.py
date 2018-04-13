@@ -32,7 +32,6 @@ class Player(object):
         self.led.update()
         if self.position - speed > 0:
             self.position -= speed
-            self.color = colors.Green
             self.update()
         else:
             self.color = colors.Red
@@ -43,7 +42,6 @@ class Player(object):
         self.led.update()
         if self.position + speed < TOTAL_LIGHTS:
             self.position += speed
-            self.color = colors.Green
             self.update()
         else:
             self.animation.run(sleep=0.1, max_steps=200)   
@@ -53,8 +51,13 @@ class Player(object):
         self.led.update()
 
     def attack(self):
-        self.color = colors.Yellow
+        self.color = colors.Purple
         self.attacking = True
+        self.update()
+
+    def stop_attack(self):
+        self.color = colors.Green
+        self.attacking = False
         self.update()
 
 
@@ -77,7 +80,6 @@ class Enemy(object):
 
     def update(self):
         self.led.set(self.position, self.color)
-        print self.position
         self.led.update()
 
 
@@ -218,6 +220,9 @@ class LightGame(object):
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
     
+            if (wii.state['acc'][cwiid.X] - defaultX) <= 10 or (defaultX - wii.state['acc'][cwiid.X]) <= 10:
+                self.player.stop_attack()
+
 
     def clear_all(self):
         self.led.fill(colors.Black)
