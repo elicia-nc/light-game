@@ -51,7 +51,7 @@ class Player(object):
 
     def update(self):
         self.led.set(self.position, self.color)
-        #self.led.update()
+        self.led.update()
 
     def attack(self):
         self.color = colors.Yellow
@@ -78,7 +78,7 @@ class Enemy(object):
 
     def update(self):
         self.led.set(self.position, self.color)
-        # self.led.update()
+        self.led.update()
 
 
 class LightGame(object):
@@ -93,7 +93,7 @@ class LightGame(object):
         self.animation = lights.WinAnimation(self.led)
         
         self.player.position = 5
-        self.enemy.position = TOTAL_LIGHTS
+        self.enemy.position = TOTAL_LIGHTS - 2
         self.led.set(self.player.position, colors.Blue)
         self.led.update()
 
@@ -229,7 +229,7 @@ class LightGame(object):
         self.player.update()
 
     def move_enemy(self, enemy):
-        for i in range(TOTAL_LIGHTS-5):
+        for i in range(TOTAL_LIGHTS/2):
             enemy.move_down()
             time.sleep(0.3)
 
