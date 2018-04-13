@@ -44,7 +44,6 @@ light at a time, then flash rainbows for a bit
 """
 class WinAnimation(BaseStripAnim):
 	def __init__(self, led, start=0, end=-1):
-		print "init win"
 		super(WinAnimation, self).__init__(led, start, end)
 		# set attributes step might need
 		self._colors = [colors.Red, colors.Orange, colors.Yellow, colors.Green, colors.Blue, colors.Indigo]
@@ -54,11 +53,11 @@ class WinAnimation(BaseStripAnim):
 		if self._step*7 < self._led.numLEDs: 
 			# move the colours along by 3 before adding another led to the ones being lit up
 			# Fill the strip, with each sucessive color
-			for i in range(self._step*7):
+			for i in range(self._step*7, -1, -1):
 				self._led.set(i, self._colors[(self._step + i) % len(self._colors)])
 		# the light strip is filled. RAINBOWS
 		else:
-			for i in range(self._led.numLEDs):
+			for i in range(self._led.numLEDs, -1, -1):
 				self._led.set(i, self._colors[(self._step + i) % len(self._colors)])
 		self._step += amt
 
