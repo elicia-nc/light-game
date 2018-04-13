@@ -26,6 +26,7 @@ class Player(object):
         self.color = colors.Violet
         self.led = led
         self.animation = lights.WinAnimation(self.led)
+        self.is_attacking = False
 
     def move_down(self, speed=1):
         self.led.set(self.position, colors.Black)
