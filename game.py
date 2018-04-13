@@ -51,7 +51,7 @@ class Player(object):
         self.led.update()
 
     def attack(self):
-        self.color = colors.Purple
+        self.color = colors.Orange
         self.attacking = True
         self.update()
 
@@ -81,6 +81,10 @@ class Enemy(object):
     def update(self):
         self.led.set(self.position, self.color)
         self.led.update()
+
+    def die(self):
+        self.color = colors.Black
+        self.update()
 
 
 class LightGame(object):
@@ -150,10 +154,15 @@ class LightGame(object):
 
             # check for collision
             if self.player.position == self.enemy.position:
-                self.led.fill(colors.Red)
-                self.led.update()
+                if player.attacking == True:
+                    self.enemy.die()
+                    del enemy
+                else:
+                    self.led.fill(colors.Red)
+                    self.led.update()
 
-            self.enemy.move_down()
+            if self.enemy:
+                self.enemy.move_down()
 
 
             # Check if other buttons are pressed by
