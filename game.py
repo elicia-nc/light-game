@@ -30,7 +30,7 @@ class Player(object):
 
     def move_down(self, speed=1):
         self.led.set(self.position, colors.Black)
-        #self.led.update()
+        self.led.update()
         if self.position - speed > 0:
             self.position -= speed
             self.color = colors.Green
@@ -41,7 +41,7 @@ class Player(object):
 
     def move_up(self, speed=1):
         self.led.set(self.position, colors.Black)
-        #self.led.update()
+        self.led.update()
         if self.position + speed < TOTAL_LIGHTS:
             self.position += speed
             self.color = colors.Green
@@ -78,6 +78,7 @@ class Enemy(object):
 
     def update(self):
         self.led.set(self.position, self.color)
+        print self.position
         self.led.update()
 
 
@@ -229,7 +230,7 @@ class LightGame(object):
         self.player.update()
 
     def move_enemy(self, enemy):
-        for i in range(TOTAL_LIGHTS/2):
+        for i in range(200):
             enemy.move_down()
             time.sleep(0.3)
 
