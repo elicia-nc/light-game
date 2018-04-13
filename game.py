@@ -151,6 +151,8 @@ class LightGame(object):
                 self.led.fill(colors.Red)
                 self.led.update()
 
+            self.move_enemy(self.enemy)
+
 
             # Check if other buttons are pressed by
             # doing a bitwise AND of the buttons number
@@ -215,8 +217,6 @@ class LightGame(object):
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
-
-            self.move_enemy(self.enemy)
     
 
     def clear_all(self):
