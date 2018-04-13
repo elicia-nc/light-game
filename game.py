@@ -151,7 +151,7 @@ class LightGame(object):
                 self.led.fill(colors.Red)
                 self.led.update()
 
-            self.move_enemy(self.enemy)
+            self.enemy.move_down()
 
 
             # Check if other buttons are pressed by
@@ -203,17 +203,17 @@ class LightGame(object):
             if (defaultY - wii.state['acc'][cwiid.Y]) > 5:
                 self.player.move_down()
 
-            if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
-                self.player.move_up(2)
+            # if (wii.state['acc'][cwiid.Y] - defaultY) > 10:
+            #     self.player.move_up(2)
 
-            if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
-                self.player.move_down(2)
+            # if (defaultY - wii.state['acc'][cwiid.Y]) > 10:
+            #     self.player.move_down(2)
 
-            if (wii.state['acc'][cwiid.Y] - defaultY) > 15:
-                self.player.move_up(4)
+            # if (wii.state['acc'][cwiid.Y] - defaultY) > 15:
+            #     self.player.move_up(4)
 
-            if (defaultY - wii.state['acc'][cwiid.Y]) > 15:
-                self.player.move_down(4)
+            # if (defaultY - wii.state['acc'][cwiid.Y]) > 15:
+            #     self.player.move_down(4)
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
@@ -225,10 +225,6 @@ class LightGame(object):
         self.player.position = 2
         self.player.color = colors.Violet
         self.player.update()
-
-    def move_enemy(self, enemy):
-        enemy.move_down()
-        #time.sleep(0.3)
 
 
 
