@@ -153,16 +153,17 @@ class LightGame(object):
                 wii.rumble = 0
                 exit(wii)  
 
-            # check for collision
-            if self.player.position == self.enemy.position:
-                if self.player.is_attacking == True:
-                    self.enemy.die()
-                    self.enemy = None
-                else:
-                    self.led.fill(colors.Red)
-                    self.led.update()
-
+            # if the enemy hasn't died yet
             if self.enemy:
+                # check for collision
+                if self.player.position == self.enemy.position:
+                    if self.player.is_attacking == True:
+                        self.enemy.die()
+                        self.enemy = None
+                    else:
+                        self.led.fill(colors.Red)
+                        self.led.update()
+                # keep moving
                 self.enemy.move_down()
 
 
