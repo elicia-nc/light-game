@@ -46,6 +46,7 @@ class Player(object):
             self.update()
         else:
             self.animation.run(sleep=0.1, max_steps=200)   
+            restart()
 
     def update(self):
         self.led.set(self.position, self.color)
@@ -163,6 +164,7 @@ class LightGame(object):
                     else:
                         self.led.fill(colors.Red)
                         self.led.update()
+                        restart()
             if self.enemy:
                 self.enemy.move_down()
 
@@ -240,8 +242,12 @@ class LightGame(object):
         self.led.fill(colors.Black)
         self.led.update()  
         self.player.position = 2
-        self.player.color = colors.Violet
+        if self.enemy:
+            self.enemy.position = TOTAL_LIGHTS - 2
+        else:
+            self.enemy = Enemy(self.led)
         self.player.update()
+
 
 
 
