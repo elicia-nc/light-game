@@ -157,7 +157,7 @@ class LightGame(object):
             if self.player.position == self.enemy.position:
                 if self.player.is_attacking == True:
                     self.enemy.die()
-                    del self.enemy
+                    self.enemy = None
                 else:
                     self.led.fill(colors.Red)
                     self.led.update()
@@ -229,8 +229,10 @@ class LightGame(object):
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
                 self.player.attack()
+                print "attack"
             else:
                 self.player.stop_attack()
+                print "no attack"
 
 
     def clear_all(self):
