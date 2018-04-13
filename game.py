@@ -26,6 +26,7 @@ class Player(object):
         self.color = colors.Violet
         self.led = led
         self.is_attacking = False
+        self.last_attack_time = time.time()
 
     def move_down(self, speed=1):
         self.led.set(self.position, colors.Black)
@@ -51,12 +52,18 @@ class Player(object):
     def attack(self):
         self.color = colors.Blue
         self.is_attacking = True
+        self.last_attack_time = time.time()
         self.update()
 
     def stop_attack(self):
         self.color = colors.Green
         self.is_attacking = False
         self.update()
+
+    # def can_attack(self):
+    #     if not self.is_attacking:
+    #         if time.time() - self.last_attack_time > 3:
+    #             return True
 
 
 class Enemy(object):
@@ -129,7 +136,7 @@ class LightGame(object):
         
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
-
+        wii.state
         defaultY = wii.state['acc'][cwiid.Y]
         defaultX = wii.state['acc'][cwiid.X]
 
@@ -232,11 +239,10 @@ class LightGame(object):
             #     self.player.move_down(4)
 
             if (wii.state['acc'][cwiid.X] - defaultX) > 10 or (defaultX - wii.state['acc'][cwiid.X]) > 10:
-                self.player.attack()
-                print "attack"
+                if player.can_attack():
+                    self.player.attack()
             else:
                 self.player.stop_attack()
-                print "no attack"
 
 
     def clear_all(self):
