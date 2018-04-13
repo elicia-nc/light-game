@@ -52,12 +52,12 @@ class Player(object):
 
     def attack(self):
         self.color = colors.Blue
-        self.attacking = True
+        self.is_attacking = True
         self.update()
 
     def stop_attack(self):
         self.color = colors.Green
-        self.attacking = False
+        self.is_attacking = False
         self.update()
 
 
@@ -152,9 +152,11 @@ class LightGame(object):
                 wii.rumble = 0
                 exit(wii)  
 
+            print self.player.is_attacking
+
             # check for collision
             if self.player.position == self.enemy.position:
-                if self.player.attacking == True:
+                if self.player.is_attacking == True:
                     self.enemy.die()
                     del self.enemy
                 else:
