@@ -132,8 +132,7 @@ class LightGame(object):
         
 
         wii.rpt_mode = cwiid.RPT_BTN | cwiid.RPT_ACC
-        time.sleep(1)
-        wii.state
+
         defaultY = wii.state['acc'][cwiid.Y]
         defaultX = wii.state['acc'][cwiid.X]
 
@@ -197,6 +196,8 @@ class LightGame(object):
                 self.animation.run(sleep=0.1, max_steps=200)      
 
             if (buttons & cwiid.BTN_B):
+                defaultY = wii.state['acc'][cwiid.Y]
+                defaultX = wii.state['acc'][cwiid.X]
                 self.clear_all()         
 
             if (buttons & cwiid.BTN_HOME):
